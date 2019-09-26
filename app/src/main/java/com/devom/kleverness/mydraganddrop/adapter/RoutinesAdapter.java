@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.devom.kleverness.mydraganddrop;
+package com.devom.kleverness.mydraganddrop.adapter;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,7 +26,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.devom.kleverness.mydraganddrop.data.AbstractDataProvider;
+import com.devom.kleverness.mydraganddrop.R;
+import com.devom.kleverness.mydraganddrop.adapterViewholder.RoutineViewHolder;
+import com.devom.kleverness.mydraganddrop.data.AbstractRoutineDataProvider;
 import com.devom.kleverness.mydraganddrop.utils.DrawableUtils;
 import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemAdapter;
 import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemState;
@@ -34,32 +36,16 @@ import com.h6ah4i.android.widget.advrecyclerview.draggable.ItemDraggableRange;
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager;
 import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractDraggableItemViewHolder;
 
-class DraggableGridExampleAdapter
-        extends RecyclerView.Adapter<DraggableGridExampleAdapter.MyViewHolder>
-        implements DraggableItemAdapter<DraggableGridExampleAdapter.MyViewHolder> {
-    private static final String TAG = "MyDraggableItemAdapter";
+public class RoutinesAdapter extends RecyclerView.Adapter<RoutineViewHolder>
+        implements DraggableItemAdapter<RoutineViewHolder> {
+
+    private static final String TAG = RoutinesAdapter.class.getSimpleName();
     private int mItemMoveMode = RecyclerViewDragDropManager.ITEM_MOVE_MODE_DEFAULT;
 
-    private AbstractDataProvider mProvider;
+    private AbstractRoutineDataProvider mProvider;
 
-    public static class MyViewHolder extends AbstractDraggableItemViewHolder {
-        public FrameLayout mContainer;
-        public View mDragHandle;
-        public TextView mTextView;
-
-        public MyViewHolder(View v) {
-            super(v);
-            mContainer = v.findViewById(R.id.container);
-            mDragHandle = v.findViewById(R.id.drag_handle);
-            mTextView = v.findViewById(android.R.id.text1);
-        }
-    }
-
-    public DraggableGridExampleAdapter(AbstractDataProvider dataProvider) {
+    public RoutinesAdapter(AbstractRoutineDataProvider dataProvider) {
         mProvider = dataProvider;
-
-        // DraggableItemAdapter requires stable ID, and also
-        // have to implement the getItemId() method appropriately.
         setHasStableIds(true);
     }
 
@@ -79,18 +65,18 @@ class DraggableGridExampleAdapter
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RoutineViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         final View v = inflater.inflate(R.layout.list_grid_item, parent, false);
-        return new MyViewHolder(v);
+        return new RoutineViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        final AbstractDataProvider.Data item = mProvider.getItem(position);
+    public void onBindViewHolder(@NonNull RoutineViewHolder holder, int position) {
+        final AbstractRoutineDataProvider.Data item = mProvider.getItem(position);
 
         // set text
-        holder.mTextView.setText(item.getText());
+        holder.mTextView.setText(item.getName());
 
         // set background resource (target view ID: container)
         final DraggableItemState dragState = holder.getDragState();
@@ -130,12 +116,12 @@ class DraggableGridExampleAdapter
     }
 
     @Override
-    public boolean onCheckCanStartDrag(@NonNull MyViewHolder holder, int position, int x, int y) {
+    public boolean onCheckCanStartDrag(@NonNull RoutineViewHolder holder, int position, int x, int y) {
         return true;
     }
 
     @Override
-    public ItemDraggableRange onGetItemDraggableRange(@NonNull MyViewHolder holder, int position) {
+    public ItemDraggableRange onGetItemDraggableRange(@NonNull RoutineViewHolder holder, int position) {
         // no drag-sortable range specified
         return null;
     }

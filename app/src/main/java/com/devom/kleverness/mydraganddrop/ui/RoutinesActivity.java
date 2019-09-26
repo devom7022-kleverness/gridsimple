@@ -14,17 +14,15 @@
  *    limitations under the License.
  */
 
-package com.devom.kleverness.mydraganddrop;
+package com.devom.kleverness.mydraganddrop.ui;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
-import com.devom.kleverness.mydraganddrop.data.AbstractDataProvider;
-import com.devom.kleverness.mydraganddrop.fragment.ExampleDataProviderFragment;
+import com.devom.kleverness.mydraganddrop.R;
 
-public class DraggableGridExampleActivity extends AppCompatActivity {
+public class RoutinesActivity extends AppCompatActivity {
     private static final String FRAGMENT_TAG_DATA_PROVIDER = "data provider";
     private static final String FRAGMENT_LIST_VIEW = "list view";
 
@@ -35,16 +33,8 @@ public class DraggableGridExampleActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(new ExampleDataProviderFragment(), FRAGMENT_TAG_DATA_PROVIDER)
-                    .commit();
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new DraggableGridExampleFragment(), FRAGMENT_LIST_VIEW)
+                    .add(R.id.container, new RoutinesFragment(), FRAGMENT_LIST_VIEW)
                     .commit();
         }
-    }
-
-    public AbstractDataProvider getDataProvider() {
-        final Fragment fragment = getSupportFragmentManager().findFragmentByTag(FRAGMENT_TAG_DATA_PROVIDER);
-        return ((ExampleDataProviderFragment) fragment).getDataProvider();
     }
 }

@@ -14,42 +14,39 @@
  *    limitations under the License.
  */
 
-package com.devom.kleverness.mydraganddrop;
+package com.devom.kleverness.mydraganddrop.ui;
 
-import android.graphics.drawable.NinePatchDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.devom.kleverness.mydraganddrop.data.AbstractDataProvider;
-import com.google.android.material.snackbar.Snackbar;
+import com.devom.kleverness.mydraganddrop.R;
+import com.devom.kleverness.mydraganddrop.adapter.RoutinesAdapter;
+import com.devom.kleverness.mydraganddrop.data.AbstractRoutineDataProvider;
+import com.devom.kleverness.mydraganddrop.data.RoutineDataProvider;
+import com.devom.kleverness.mydraganddrop.data.RoutineItemProvider;
 import com.h6ah4i.android.widget.advrecyclerview.animator.DraggableItemAnimator;
 import com.h6ah4i.android.widget.advrecyclerview.animator.GeneralItemAnimator;
-import com.h6ah4i.android.widget.advrecyclerview.decoration.ItemShadowDecorator;
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager;
 import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils;
 
-public class DraggableGridExampleFragment extends Fragment {
+import java.util.LinkedList;
+
+public class RoutinesFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
-    private DraggableGridExampleAdapter mAdapter;
+    private RoutinesAdapter mAdapter;
     private RecyclerView.Adapter mWrappedAdapter;
     private RecyclerViewDragDropManager mRecyclerViewDragDropManager;
 
-    public DraggableGridExampleFragment() {
+    public RoutinesFragment() {
         super();
     }
 
@@ -84,8 +81,10 @@ public class DraggableGridExampleFragment extends Fragment {
         mRecyclerViewDragDropManager.setDraggingItemScale(1.3f);
         mRecyclerViewDragDropManager.setDraggingItemRotation(15.0f);
 
+        AbstractRoutineDataProvider dataProvider = new RoutineDataProvider(getDataProvider());
+
         //adapter
-        final DraggableGridExampleAdapter myItemAdapter = new DraggableGridExampleAdapter(getDataProvider());
+        final RoutinesAdapter myItemAdapter = new RoutinesAdapter(dataProvider);
         mAdapter = myItemAdapter;
 
         mWrappedAdapter = mRecyclerViewDragDropManager.createWrappedAdapter(myItemAdapter);      // wrap for dragging
@@ -129,7 +128,22 @@ public class DraggableGridExampleFragment extends Fragment {
         super.onDestroyView();
     }
 
-    public AbstractDataProvider getDataProvider() {
-        return ((DraggableGridExampleActivity) getActivity()).getDataProvider();
+    public LinkedList getDataProvider() {
+        LinkedList routineLinkedList = new LinkedList<>();
+
+        long itemId = 0;
+
+        for (int i = 1; i <= 99; i++) {
+            routineLinkedList.add(new RoutineItemProvider(
+                    itemId,
+                    1,
+                    String.valueOf(i),
+                    "Routine" + i
+            ));
+
+            itemId++;
+        }
+
+        return routineLinkedList;
     }
 }

@@ -16,20 +16,17 @@
 
 package com.devom.kleverness.mydraganddrop.data;
 
-public abstract class AbstractDataProvider {
+public abstract class AbstractRoutineDataProvider {
 
     public static abstract class Data {
         public abstract long getId();
 
-        public abstract boolean isSectionHeader();
-
         public abstract int getViewType();
 
-        public abstract String getText();
+        public abstract String getRoutineId();
 
-        public abstract void setPinned(boolean pinned);
+        public abstract String getName();
 
-        public abstract boolean isPinned();
     }
 
     public abstract int getCount();
