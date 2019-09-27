@@ -1,13 +1,13 @@
 package com.devom.kleverness.mydraganddrop.data;
 
-public class RoutineItemProvider extends AbstractRoutineDataProvider.Data {
+public class SceneItemProvider extends AbstractSceneDataProvider.Data {
 
     private final long id;
     private final int viewType;
     private String routineId;
     private String name;
 
-    public RoutineItemProvider(long id, int viewType, String routineId, String name) {
+    public SceneItemProvider(long id, int viewType, String routineId, String name) {
         this.id = id;
         this.viewType = viewType;
         this.routineId = routineId;

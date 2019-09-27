@@ -28,10 +28,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.devom.kleverness.mydraganddrop.R;
-import com.devom.kleverness.mydraganddrop.adapter.RoutinesAdapter;
-import com.devom.kleverness.mydraganddrop.data.AbstractRoutineDataProvider;
-import com.devom.kleverness.mydraganddrop.data.RoutineDataProvider;
-import com.devom.kleverness.mydraganddrop.data.RoutineItemProvider;
+import com.devom.kleverness.mydraganddrop.adapter.SceneAdapter;
+import com.devom.kleverness.mydraganddrop.data.AbstractSceneDataProvider;
+import com.devom.kleverness.mydraganddrop.data.SceneDataProvider;
+import com.devom.kleverness.mydraganddrop.data.SceneItemProvider;
 import com.h6ah4i.android.widget.advrecyclerview.animator.DraggableItemAnimator;
 import com.h6ah4i.android.widget.advrecyclerview.animator.GeneralItemAnimator;
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager;
@@ -39,14 +39,14 @@ import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils;
 
 import java.util.LinkedList;
 
-public class RoutinesFragment extends Fragment {
+public class ScenesFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
-    private RoutinesAdapter mAdapter;
+    private SceneAdapter mAdapter;
     private RecyclerView.Adapter mWrappedAdapter;
     private RecyclerViewDragDropManager mRecyclerViewDragDropManager;
 
-    public RoutinesFragment() {
+    public ScenesFragment() {
         super();
     }
 
@@ -81,10 +81,10 @@ public class RoutinesFragment extends Fragment {
         mRecyclerViewDragDropManager.setDraggingItemScale(1.3f);
         mRecyclerViewDragDropManager.setDraggingItemRotation(15.0f);
 
-        AbstractRoutineDataProvider dataProvider = new RoutineDataProvider(getDataProvider());
+        AbstractSceneDataProvider dataProvider = new SceneDataProvider(getDataProvider());
 
         //adapter
-        final RoutinesAdapter myItemAdapter = new RoutinesAdapter(dataProvider);
+        final SceneAdapter myItemAdapter = new SceneAdapter(dataProvider);
         mAdapter = myItemAdapter;
 
         mWrappedAdapter = mRecyclerViewDragDropManager.createWrappedAdapter(myItemAdapter);      // wrap for dragging
@@ -134,7 +134,7 @@ public class RoutinesFragment extends Fragment {
         long itemId = 0;
 
         for (int i = 1; i <= 99; i++) {
-            routineLinkedList.add(new RoutineItemProvider(
+            routineLinkedList.add(new SceneItemProvider(
                     itemId,
                     1,
                     String.valueOf(i),

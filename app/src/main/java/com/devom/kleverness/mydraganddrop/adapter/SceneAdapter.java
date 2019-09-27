@@ -20,31 +20,28 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.devom.kleverness.mydraganddrop.R;
-import com.devom.kleverness.mydraganddrop.adapterViewholder.RoutineViewHolder;
-import com.devom.kleverness.mydraganddrop.data.AbstractRoutineDataProvider;
+import com.devom.kleverness.mydraganddrop.adapterViewholder.SceneViewHolder;
+import com.devom.kleverness.mydraganddrop.data.AbstractSceneDataProvider;
 import com.devom.kleverness.mydraganddrop.utils.DrawableUtils;
 import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemAdapter;
 import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemState;
 import com.h6ah4i.android.widget.advrecyclerview.draggable.ItemDraggableRange;
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager;
-import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractDraggableItemViewHolder;
 
-public class RoutinesAdapter extends RecyclerView.Adapter<RoutineViewHolder>
-        implements DraggableItemAdapter<RoutineViewHolder> {
+public class SceneAdapter extends RecyclerView.Adapter<SceneViewHolder>
+        implements DraggableItemAdapter<SceneViewHolder> {
 
-    private static final String TAG = RoutinesAdapter.class.getSimpleName();
+    private static final String TAG = SceneAdapter.class.getSimpleName();
     private int mItemMoveMode = RecyclerViewDragDropManager.ITEM_MOVE_MODE_DEFAULT;
 
-    private AbstractRoutineDataProvider mProvider;
+    private AbstractSceneDataProvider mProvider;
 
-    public RoutinesAdapter(AbstractRoutineDataProvider dataProvider) {
+    public SceneAdapter(AbstractSceneDataProvider dataProvider) {
         mProvider = dataProvider;
         setHasStableIds(true);
     }
@@ -65,15 +62,15 @@ public class RoutinesAdapter extends RecyclerView.Adapter<RoutineViewHolder>
 
     @NonNull
     @Override
-    public RoutineViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public SceneViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         final View v = inflater.inflate(R.layout.list_grid_item, parent, false);
-        return new RoutineViewHolder(v);
+        return new SceneViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RoutineViewHolder holder, int position) {
-        final AbstractRoutineDataProvider.Data item = mProvider.getItem(position);
+    public void onBindViewHolder(@NonNull SceneViewHolder holder, int position) {
+        final AbstractSceneDataProvider.Data item = mProvider.getItem(position);
 
         // set text
         holder.mTextView.setText(item.getName());
@@ -116,12 +113,12 @@ public class RoutinesAdapter extends RecyclerView.Adapter<RoutineViewHolder>
     }
 
     @Override
-    public boolean onCheckCanStartDrag(@NonNull RoutineViewHolder holder, int position, int x, int y) {
+    public boolean onCheckCanStartDrag(@NonNull SceneViewHolder holder, int position, int x, int y) {
         return true;
     }
 
     @Override
-    public ItemDraggableRange onGetItemDraggableRange(@NonNull RoutineViewHolder holder, int position) {
+    public ItemDraggableRange onGetItemDraggableRange(@NonNull SceneViewHolder holder, int position) {
         // no drag-sortable range specified
         return null;
     }

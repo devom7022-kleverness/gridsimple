@@ -16,7 +16,7 @@
 
 package com.devom.kleverness.mydraganddrop.data;
 
-public abstract class AbstractRoutineDataProvider {
+public abstract class AbstractSceneDataProvider {
 
     public static abstract class Data {
         public abstract long getId();

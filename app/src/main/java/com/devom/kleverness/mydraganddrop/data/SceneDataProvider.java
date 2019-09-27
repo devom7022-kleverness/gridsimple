@@ -3,12 +3,12 @@ package com.devom.kleverness.mydraganddrop.data;
 import java.util.Collections;
 import java.util.List;
 
-public class RoutineDataProvider extends AbstractRoutineDataProvider {
-    private List<RoutineItemProvider> mData;
-    private RoutineItemProvider mLastRemovedData;
+public class SceneDataProvider extends AbstractSceneDataProvider {
+    private List<SceneItemProvider> mData;
+    private SceneItemProvider mLastRemovedData;
     private int mLastRemovedPosition = -1;
 
-    public RoutineDataProvider(List<RoutineItemProvider> mData) {
+    public SceneDataProvider(List<SceneItemProvider> mData) {
         this.mData = mData;
     }
 
@@ -53,7 +53,7 @@ public class RoutineDataProvider extends AbstractRoutineDataProvider {
             return;
         }
 
-        final RoutineItemProvider item = mData.remove(fromPosition);
+        final SceneItemProvider item = mData.remove(fromPosition);
 
         mData.add(toPosition, item);
         mLastRemovedPosition = -1;
@@ -72,7 +72,7 @@ public class RoutineDataProvider extends AbstractRoutineDataProvider {
     @Override
     public void removeItem(int position) {
         //noinspection UnnecessaryLocalVariable
-        final RoutineItemProvider removedItem = mData.remove(position);
+        final SceneItemProvider removedItem = mData.remove(position);
 
         mLastRemovedData = removedItem;
         mLastRemovedPosition = position;

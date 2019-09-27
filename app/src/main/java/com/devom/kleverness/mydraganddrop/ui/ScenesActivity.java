@@ -22,7 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.devom.kleverness.mydraganddrop.R;
 
-public class RoutinesActivity extends AppCompatActivity {
+public class ScenesActivity extends AppCompatActivity {
     private static final String FRAGMENT_TAG_DATA_PROVIDER = "data provider";
     private static final String FRAGMENT_LIST_VIEW = "list view";
 
@@ -33,7 +33,7 @@ public class RoutinesActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new RoutinesFragment(), FRAGMENT_LIST_VIEW)
+                    .add(R.id.container, new ScenesFragment(), FRAGMENT_LIST_VIEW)
                     .commit();
         }
     }
